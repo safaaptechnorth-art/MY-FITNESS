@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prime Fitness Club</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    
+    /* FAQ Accordion Styling */
+.accordion-item {
+  background: #141414;        /* dark panel */
+  border: 1px solid #2b2b2b;
+}
+
+.accordion-button {
+  background: #1a1a1a;
+  color: #9acd32;             /* bottle green text */
+  font-weight: 600;
+}
+
+./* Background with logo */
+body {
+  background: url('images/logo.png') center center fixed; /* logo ka path */
+  background-size: 200px;   /* logo ka size (badal sakte ho) */
+  background-repeat: repeat; /* repeat / no-repeat / space / round */
+  background-color: #000;   /* black theme base */
+}
+body {
+  background: url('images/logo.png') center center fixed no-repeat;
+  background-size: 600px;   /* logo ka size adjust karein */
+  background-color: #000;   /* black base */
+}
+
+/* Dark overlay for better readability */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85); /* transparency control */
+  z-index: -1;
+}
+-button:not(.collapsed) {
+  background: #222;
+  color: #fff;                /* white when opened */
+  box-shadow: none;
+}
+
+.accordion-body {
+  background: #0f0f0f;
+  color: #e0e0e0;             /* light grey text */
+}
+
+    /* Card Styling */
+.card {
+  background: #141414;        /* dark panel */
+  border: 1px solid #1e1e1e;
+  color: #e0e0e0;             /* light text inside card */
+}
+.card h5 {
+  color: #9acd32;             /* bottle green headings */
+}
+.card p, .card li {
+  color: #cccccc;             /* light grey for description */
+}
+
+/* Form Styling */
+.form-control, .form-select, textarea {
+  background: #1a1a1a;        /* dark input background */
+  border: 1px solid #333;     /* subtle border */
+  color: #f0f0f0;             /* light text */
+}
+.form-control::placeholder, textarea::placeholder {
+  color: #888;                /* muted placeholder */
+}
+.form-control:focus, .form-select:focus, textarea:focus {
+  border-color: #9acd32;      /* bottle green on focus */
+  box-shadow: 0 0 0 .25rem rgba(154, 205, 50, .25);
+}
+
+    :root{
+      --bottle: #86c232;    /* bright bottle green */
+      --bottle-2:#6aa120;   /* darker bottle green */
+      --ink:    #0b0b0b;    /* near-black page bg */
+      --panel:  #141414;    /* card/nav bg */
+      --muted:  #cfcfcf;    /* light text */
+    }
+    html,body{background:var(--ink); color:var(--muted);}
+    .navbar{background:var(--panel);}
+    .navbar .nav-link,.navbar-brand{color:var(--bottle)!important; font-weight:600}
+    .nav-link:hover{color:#fff!important}
+    .btn-bottle{background:var(--bottle); color:#0b0b0b; font-weight:700; border:none}
+    .btn-bottle:hover{background:var(--bottle-2); color:#fff}
+    .section{padding:72px 0}
+    .section-title{color:var(--bottle); font-weight:800}
+    .hero{
+      background: radial-gradient(ellipse at 40% 10%, rgba(134,194,50,.18), transparent 60%),
+                  url('https://images.unsplash.com/photo-1517963628607-235ccdd5476e?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      padding:120px 0 80px; text-align:center; position:relative; isolation:isolate;
+    }
+    .hero::after{content:""; position:absolute; inset:0; background:rgba(0,0,0,.55); z-index:-1}
+    .hero h1{color:var(--bottle); font-size:3rem; font-weight:900}
+    .card{background:var(--panel); border:1px solid #1e1e1e}
+    .card img{height:220px; object-fit:cover}
+    .pill{display:inline-block; background:#0f0f0f; border:1px solid #1f1f1f; padding:.35rem .7rem; border-radius:999px}
+    .footer{background:var(--panel); color:#bdbdbd}
+    a.link-muted{color:#cfcfcf; text-decoration:none}
+    a.link-muted:hover{color:var(--bottle)}
+    .table{--bs-table-bg:var(--panel); --bs-table-color:var(--muted); --bs-table-border-color:#2b2b2b}
+    .form-control, .form-select{background:#0f0f0f; border:1px solid #2b2b2b; color:#e7e7e7}
+    .form-control:focus, .form-select:focus{border-color:var(--bottle); box-shadow:0 0 0 .2rem rgba(134,194,50,.25)}
+    .sitemap a{display:block; padding:.25rem 0}
+    .logo{width:36px; height:36px}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
+      <img class="logo" alt="Prime Fitness logo"
+           src="https://cdn-icons-png.flaticon.com/512/2964/2964514.png">
+      Prime Fitness
+    </a>
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Facilities</a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="#cycling">Cycling</a></li>
+            <li><a class="dropdown-item" href="#swimming">Swimming</a></li>
+            <li><a class="dropdown-item" href="#sports">Sports & Fitness</a></li>
+            <li><a class="dropdown-item" href="#group">Group Exercise</a></li>
+            <li><a class="dropdown-item" href="#salon">Salon & Spa</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#membership">Membership</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#equipment">Equipments</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faqs">FAQ’s</a></li>
+        <li class="nav-item"><a class="nav-link" href="#enquiry">Enquiry</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sitemap">Site Map</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header id="home" class="hero">
+  <div class="container">
+    <h1>Welcome to Prime Fitness Club</h1>
+    <p class="lead mb-4">Established in 1982 — your partner in health and fitness excellence.</p>
+    <a href="#membership" class="btn btn-bottle btn-lg"><i class="bi bi-person-plus"></i> Join Now</a>
+  </div>
+</header>
+
+<!-- About -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title mb-4">About Us</h2>
+    <p class="mb-0">
+      Prime Fitness is a fitness club established in 1982. The club is equipped with
+      all basic fitness equipment and also includes newly introduced machines.
+      The Prime Fitness Club is the flagship brand for Prime Fitness Club Ltd, a UN-based
+      health and fitness services provider and a pioneer in the
+      “Integrated Health Club Management Solutions” business. Prime Fitness Club Ltd focuses
+      on staying fit as a key to meeting life’s challenges.
+    </p>
+  </div>
+</section>
+
+<!-- Facilities Cards -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Cycling -->
+      <div class="col-md-6 col-lg-4" id="cycling">
+        <div class="card h-100">
+          <img src="https://images.pexels.com/photos/4753898/pexels-photo-4753898.jpeg?auto=compress&cs=tinysrgb&w=1600" class="card-img-top" alt="Indoor cycling">
+          <div class="card-body">
+            <h5 class="card-title text-white">Cycling</h5>
+            <p class="card-text">High-intensity spin classes with performance tracking and music-driven coaching.</p>
+            <span class="pill"><i class="bi bi-lightning-charge"></i> HIIT</span>
+          </div>
+        </div>
+      </div>
+      <!-- Swimming -->
+      <div class="col-md-6 col-lg-4" id="swimming">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=80&w=1600&auto=format&fit=crop" class="card-img-top" alt="Swimming pool">
+          <div class="card-body">
+            <h5 class="card-title text-white">Swimming</h5>
+            <p class="card-text">Temperature-controlled indoor pool with lanes for training and aqua-fitness.</p>
+            <span class="pill"><i class="bi bi-droplet"></i> Aqua</span>
+          </div>
+        </div>
+      </div>
+      <!-- Sports & Fitness -->
+      <div class="col-md-6 col-lg-4" id="sports">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop" class="card-img-top" alt="Strength training">
+          <div class="card-body">
+            <h5 class="card-title text-white">Sports & Fitness</h5>
+            <p class="card-text">Strength, cardio, and functional zones featuring top-notch equipment.</p>
+            <span class="pill"><i class="bi bi-bar-chart"></i> Progressive</span>
+          </div>
+        </div>
+      </div>
+      <!-- Group Exercise -->
+      <div class="col-md-6 col-lg-4" id="group">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1600&auto=format&fit=crop" class="card-img-top" alt="Group class">
+          <div class="card-body">
+            <h5 class="card-title text-white">Group Exercise</h5>
+            <p class="card-text">Yoga, Zumba, bootcamps, and mobility sessions led by certified instructors.</p>
+            <span class="pill"><i class="bi bi-people"></i> Community</span>
+          </div>
+        </div>
+      </div>
+            <!-- Salon & Spa -->
+      <div class="col-md-6 col-lg-4" id="salon">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1600&auto=format&fit=crop" class="card-img-top" alt="Spa">
+          <div class="card-body">
+            <h5 class="card-title text-white">Salon & Spa</h5>
+            <p class="card-text">Massage, sauna, and grooming services to help you recover and relax.</p>
+            <span class="pill"><i class="bi bi-stars"></i> Recovery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="membership" class="py-5">
+  <div class="container text-center">
+    <h2 class="text-success mb-4">Membership Plans</h2>
+    <div class="row">
+
+      <!-- Basic Plan -->
+      <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-light shadow-lg border-success">
+          <img src="assets/image.png" class="card-img-top" alt="Basic Plan - Gym Equipment">
+          <div class="card-body">
+            <h5 class="card-title text-success">Basic</h5>
+            <p class="card-text">Access to gym equipment and facilities.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Standard Plan -->
+      <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-light shadow-lg border-success">
+          <img src="assets/imag 2.webp" class="card-img-top" alt="Standard Plan - Group Exercise & Swimming">
+          <div class="card-body">
+            <h5 class="card-title text-success">Standard</h5>
+            <p class="card-text">Includes group exercises and swimming.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Plan -->
+      <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-light shadow-lg border-success">
+          <img src="assets/image 3.jpg" class="card-img-top" alt="Premium Plan - Spa & Fitness">
+          <div class="card-body">
+            <h5 class="card-title text-success">Premium</h5>
+            <p class="card-text">All facilities + salon & spa access.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Gallery -->
+<section id="gallery" class="section">
+  <div class="container">
+    <h2 class="section-title mb-4">Gallery</h2>
+    <div class="row g-3">
+      <div class="col-6 col-md-4"><img class="w-100 rounded" alt="" src="https://images.unsplash.com/photo-1494390248081-4e521a5940db?q=80&w=1200&auto=format&fit=crop"></div>
+      <div class="col-6 col-md-4"><img class="w-100 rounded" alt="" src="https://images.unsplash.com/photo-1574049484658-1c27a1477c3b?q=80&w=1200&auto=format&fit=crop"></div>
+      <div class="col-6 col-md-4"><img class="w-100 rounded" alt="" src="https://images.unsplash.com/photo-1518617840859-acd542e13b10?q=80&w=1200&auto=format&fit=crop"></div>
+      <div class="col-6 col-md-4"><img class="w-100 rounded" alt="" src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?q=80&w=1200&auto=format&fit=crop"></div>
+      <div class="col-6 col-md-4"><img class="w-100 rounded" alt="" src="https://images.unsplash.com/photo-1581009137042-c552e4856971?q=80&w=1200&auto=format&fit=crop"></div>
+      <div class="col-6 col-md-4"><img class="w-100 rounded" alt="" src="https://images.unsplash.com/photo-1517963628607-235ccdd5476e?q=80&w=1200&auto=format&fit=crop"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Equipment List -->
+<section id="equipment" class="section">
+  <div class="container">
+    <h2 class="section-title mb-4">List of Equipments & Description</h2>
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr><th>Equipment</th><th>Description</th><th>Primary Use</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Treadmill</td>
+            <td>Motorized running deck with incline & speed controls.</td>
+            <td>Cardio / Endurance</td>
+          </tr>
+          <tr>
+            <td>Elliptical Trainer</td>
+            <td>Low-impact cross-trainer with heart-rate sensors.</td>
+            <td>Cardio / Full body</td>
+          </tr>
+          <tr>
+            <td>Power Rack + Barbell</td>
+            <td>Adjustable rack for squats, bench, deadlifts; includes safety pins.</td>
+            <td>Strength / Compound lifts</td>
+          </tr>
+          <tr>
+            <td>Dumbbells (2–50kg)</td>
+            <td>Rubber-coated set for isolation & functional moves.</td>
+            <td>Strength / Hypertrophy</td>
+          </tr>
+          <tr>
+            <td>Cable Crossover</td>
+            <td>Dual pulleys with accessories for multi-angle training.</td>
+            <td>Strength / Mobility</td>
+          </tr>
+          <tr>
+            <td>Rowing Machine</td>
+            <td>Air-magnetic resistance rower with performance console.</td>
+            <td>Cardio / Back & Core</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQs -->
+<section id="faqs" class="section">
+  <div class="container">
+    <h2 class="section-title mb-4">FAQ’s</h2>
+    <div class="accordion" id="faqAcc">
+      <div class="accordion-item bg-transparent border-secondary">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f1">
+            What are your operating hours?
+          </button>
+        </h2>
+        <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+          <div class="accordion-body">
+            Mon–Sat: 6:00 AM – 10:00 PM, Sun: 8:00 AM – 6:00 PM.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item bg-transparent border-secondary">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f2">
+            Do you offer personal training?
+          </button>
+        </h2>
+        <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+          <div class="accordion-body">
+            Yes—certified trainers are available. Add-on packages can be attached to any membership.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item bg-transparent border-secondary">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f3">
+            Is there a trial pass?
+          </button>
+        </h2>
+        <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+          <div class="accordion-body">
+            We provide a 1-day guest pass. Bring a valid ID to the front desk.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Enquiry Form -->
+<section id="enquiry" class="section">
+  <div class="container">
+    <h2 class="section-title mb-4">Enquiry Form</h2>
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <form class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" required>
+              <div class="invalid-feedback">Please enter your name.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" required>
+              <div class="invalid-feedback">Provide a valid email.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-control" pattern="[0-9+\-\s]{7,}" required>
+              <div class="invalid-feedback">Enter a valid phone number.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Interested In</label>
+              <select class="form-select" required>
+                <option value="">Choose…</option>
+                <option>Cycling</option>
+                <option>Swimming</option>
+                <option>Sports & Fitness</option>
+                <option>Group Exercise</option>
+                <option>Membership</option>
+                <option>Salon & Spa</option>
+              </select>
+              <div class="invalid-feedback">Please select a service.</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="4" placeholder="Tell us your goals…"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-bottle btn-lg" type="submit">
+                <i class="bi bi-send"></i> Submit Enquiry
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="text-white">Contact</h5>
+            <p class="mb-1"><i class="bi bi-geo-alt"></i> Prime Fitness Club, City Center</p>
+            <p class="mb-1"><i class="bi bi-telephone"></i> +92 300 0000000</p>
+            <p class="mb-3"><i class="bi bi-envelope"></i> info@primefitness.example</p>
+            <p class="small text-secondary mb-0">We usually reply within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Site Map -->
+<section id="sitemap" class="section">
+  <div class="container">
+    <h2 class="section-title mb-3">Site Map</h2>
+    <div class="row sitemap">
+      <div class="col-md-3">
+        <a class="link-muted" href="#home">Home</a>
+        <a class="link-muted" href="#about">About</a>
+        <a class="link-muted" href="#faqs">FAQ’s</a>
+      </div>
+      <div class="col-md-3">
+        <a class="link-muted" href="#cycling">Cycling</a>
+        <a class="link-muted" href="#swimming">Swimming</a>
+        <a class="link-muted" href="#sports">Sports & Fitness</a>
+      </div>
+      <div class="col-md-3">
+        <a class="link-muted" href="#group">Group Exercise</a>
+        <a class="link-muted" href="#membership">Membership</a>
+        <a class="link-muted" href="#salon">Salon & Spa</a>
+      </div>
+      <div class="col-md-3">
+        <a class="link-muted" href="#gallery">Gallery</a>
+        <a class="link-muted" href="#equipment">Equipments</a>
+        <a class="link-muted" href="#enquiry">Enquiry Form</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer py-4 mt-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <img class="logo" alt="logo" src="https://cdn-icons-png.flaticon.com/512/2964/2964514.png">
+      <span>© <span id="yr"></span> Prime Fitness</span>
+    </div>
+    <div class="small">
+      <a class="link-muted" href="#faqs">FAQ’s</a> ·
+      <a class="link-muted" href="#sitemap">Site Map</a>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // simple Bootstrap validation
+  (() => {
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', e => {
+        if (!form.checkValidity()) { e.preventDefault(); e.stopPropagation(); }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
+</body>
+</html>
